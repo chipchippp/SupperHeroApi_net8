@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SuperHeroApi_net8.Data;
 
@@ -11,9 +12,11 @@ using SuperHeroApi_net8.Data;
 namespace SuperHeroApi_net8.Migrations
 {
     [DbContext(typeof(SuperHeroApi_net8Context))]
-    partial class SuperHeroApi_net8ContextModelSnapshot : ModelSnapshot
+    [Migration("20240405140058_InititalUpdate")]
+    partial class InititalUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
