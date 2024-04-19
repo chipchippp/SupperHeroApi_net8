@@ -11,15 +11,15 @@ using SuperHeroApi_net8.Data;
 namespace SuperHeroApi_net8.Migrations
 {
     [DbContext(typeof(SuperHeroApi_net8Context))]
-    [Migration("20240328085026_Students")]
-    partial class Students
+    [Migration("20240411185621_Orders")]
+    partial class Orders
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.2")
+                .HasAnnotation("ProductVersion", "8.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -53,6 +53,28 @@ namespace SuperHeroApi_net8.Migrations
                     b.ToTable("SuperHero");
                 });
 
+            modelBuilder.Entity("SuperHeroApi_net8.Entity.Crud", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Age")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IsActive")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Crud");
+                });
+
             modelBuilder.Entity("SuperHeroApi_net8.Entity.Employee", b =>
                 {
                     b.Property<int>("Id")
@@ -78,7 +100,7 @@ namespace SuperHeroApi_net8.Migrations
                     b.ToTable("Employee");
                 });
 
-            modelBuilder.Entity("SuperHeroApi_net8.Entity.Student", b =>
+            modelBuilder.Entity("SuperHeroApi_net8.Entity.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -86,17 +108,42 @@ namespace SuperHeroApi_net8.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ImageName")
+                    b.Property<string>("Image")
                         .IsRequired()
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TotalOrders")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Student");
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("SuperHeroApi_net8.Entity.Users", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }
